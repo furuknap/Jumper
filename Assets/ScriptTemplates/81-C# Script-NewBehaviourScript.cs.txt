@@ -1,0 +1,18 @@
+using UnityEngine;
+// #PROJECTNAME#
+
+namespace Jumper
+{
+    public class #SCRIPTNAME# : MonoBehaviour
+    {
+        void Start()
+        {
+            #NOTRIM#
+        }
+
+        void Update()
+        {
+            #NOTRIM#
+        }
+    }
+}
