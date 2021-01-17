@@ -80,7 +80,11 @@ namespace Jumper
 
         private void Move(float move)
         {
-            _rigidbody.velocity = new Vector2(move, 0);
+            if (GameManager.Instance.CanMove)
+            {
+                _rigidbody.velocity = new Vector2(move, 0);
+
+            }
         }
 
         private void Jump()

@@ -38,6 +38,7 @@ namespace Jumper
         {
             var rb = player.gameObject.GetComponent<Rigidbody2D>();
             rb.AddForce(new Vector2(-1, 0) * (Power * _forceMultiplier));
+            GameManager.Instance.Hit();
             Destroy(gameObject);
         }
 

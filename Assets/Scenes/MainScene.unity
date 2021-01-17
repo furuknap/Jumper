@@ -228,6 +228,9 @@ MonoBehaviour:
   _player: {fileID: 561288670}
   _playerSpawnPoint: {fileID: 2111502883}
   _enemyPrefab: {fileID: 1408889051619168853, guid: 3f595e5a3a57bdf4ca8d2b79abe7f2bb, type: 3}
+  CanMove: 0
+  CanMoveTimer: 0
+  canMoveTimeout: 0.2
 --- !u!1 &289870605
 GameObject:
   m_ObjectHideFlags: 0

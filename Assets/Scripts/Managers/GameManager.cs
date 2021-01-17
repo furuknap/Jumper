@@ -27,10 +27,14 @@ namespace Jumper
 
         int _enemyCount;
 
+        public bool CanMove;
+        public float CanMoveTimer = 0.0f;
+        [SerializeField]
+        float canMoveTimeout = 1.0f;
 
-        void Start()
+        public void Hit()
         {
-
+            CanMoveTimer = canMoveTimeout;
         }
 
         void Update()
@@ -40,6 +44,16 @@ namespace Jumper
             {
                 _spawnTimer = 0f;
                 SpawnEnemy();
+            }
+
+            if (CanMoveTimer > 0)
+            {
+                CanMoveTimer -= Time.deltaTime;
+                CanMove = false;
+            }
+            else
+            {
+                CanMove = true;
             }
         }
 
