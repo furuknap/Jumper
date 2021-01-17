@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1408889051619168853}
   - component: {fileID: 1408889051619168938}
   m_Layer: 0
-  m_Name: Enemy 1
+  m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.0000009536743, y: 0.0050029755}
@@ -125,6 +125,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Power: 10
   Speed: 3
+  _forceMultiplier: 50
+  _horizontalBounds: {x: -6, y: 6}
 --- !u!50 &1408889051619168938
 Rigidbody2D:
   serializedVersion: 4

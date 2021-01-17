@@ -15,8 +15,12 @@ namespace Jumper
         [SerializeField]
         private float _jumpForce;
 
+        [SerializeField]
+        Vector2 _horizontalBounds = new Vector2(-6, 6);
+        [SerializeField]
+        Vector2 _verticalBounds = new Vector2(-3, 1.8f);
 
-        float _defaultgravity;
+
 
         private void OnCollisionEnter2D(Collision2D other)
         {
@@ -30,19 +34,14 @@ namespace Jumper
                 Win();
             }
 
-            if (other.collider.CompareTag("Enemy"))
-            {
-                var enemyHit = other.gameObject.GetComponentInChildren<Enemy>();
-                KnockBack(enemyHit);
-            }
+            //if (other.collider.CompareTag("Enemy"))
+            //{
+            //    var enemyHit = other.gameObject.GetComponentInChildren<Enemy>();
+            //    KnockBack(enemyHit);
+            //}
 
         }
 
-        private void KnockBack(Enemy enemy)
-        {
-            _rigidbody.AddForce(new Vector2(1, 0) * enemy.Power);
-            Destroy(enemy.gameObject);
-        }
 
         private void Win()
         {
@@ -57,7 +56,6 @@ namespace Jumper
         void Start()
         {
             _rigidbody = GetComponentInChildren<Rigidbody2D>(); // Getting from children to allow for restructure of player GO.
-            _defaultgravity = _rigidbody.gravityScale;
         }
 
         void Update()
@@ -72,6 +70,12 @@ namespace Jumper
             {
                 Jump();
             }
+
+
+            //var x = Mathf.Clamp(transform.position.x, _horizontalBounds.x, _horizontalBounds.y);
+            //var y = Mathf.Clamp(transform.position.y, _verticalBounds.x, _verticalBounds.y);
+            //transform.position = new Vector3(x, y, -1);
+
         }
 
         private void Move(float move)
