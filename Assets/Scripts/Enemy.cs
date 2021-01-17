@@ -24,6 +24,10 @@ namespace Jumper
         void Update()
         {
             _rigidbody.velocity = new Vector2(Speed * -1, _rigidbody.velocity.y);
+            if (transform.position.x < _horizontalBounds.x)
+            {
+                Destroy(gameObject);
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D other)

@@ -66,15 +66,15 @@ namespace Jumper
                 Move(move);
             }
 
-            if (Input.GetButton("Jump"))
+            if (Input.GetButtonUp("Jump"))
             {
                 Jump();
             }
 
 
-            //var x = Mathf.Clamp(transform.position.x, _horizontalBounds.x, _horizontalBounds.y);
-            //var y = Mathf.Clamp(transform.position.y, _verticalBounds.x, _verticalBounds.y);
-            //transform.position = new Vector3(x, y, -1);
+            var x = Mathf.Clamp(transform.position.x, _horizontalBounds.x, _horizontalBounds.y);
+            var y = Mathf.Clamp(transform.position.y, _verticalBounds.x, _verticalBounds.y);
+            transform.position = new Vector3(x, y, -1);
 
         }
 
@@ -82,14 +82,19 @@ namespace Jumper
         {
             if (GameManager.Instance.CanMove)
             {
-                _rigidbody.velocity = new Vector2(move, 0);
+                _rigidbody.velocity = new Vector2(move * _speed, _rigidbody.velocity.y);
 
             }
         }
 
         private void Jump()
         {
-            _rigidbody.AddForce(new Vector2(0, _jumpForce));
+            if (GameManager.Instance.CanJump)
+            {
+                GameManager.Instance.Jump();
+                _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+
+            }
         }
     }
 }

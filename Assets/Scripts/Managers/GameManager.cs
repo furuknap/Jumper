@@ -30,11 +30,18 @@ namespace Jumper
         public bool CanMove;
         public float CanMoveTimer = 0.0f;
         [SerializeField]
-        float canMoveTimeout = 1.0f;
+        float _canMoveTimeout = 1.0f;
+
+
+        public bool CanJump;
+        public float CanJumpTimer = 0.0f;
+        [SerializeField]
+        float _canJumpTimeout = 1.0f;
+
 
         public void Hit()
         {
-            CanMoveTimer = canMoveTimeout;
+            CanMoveTimer = _canMoveTimeout;
         }
 
         void Update()
@@ -55,6 +62,16 @@ namespace Jumper
             {
                 CanMove = true;
             }
+
+            if (CanJumpTimer > 0)
+            {
+                CanJumpTimer -= Time.deltaTime;
+                CanJump = false;
+            }
+            else
+            {
+                CanJump = true;
+            }
         }
 
         private void SpawnEnemy()
@@ -71,8 +88,13 @@ namespace Jumper
                 enemy.transform.position = new Vector3(5, RandomService.Instance.Range(-2, 1), -1);
 
             }
-            enemy.Power = RandomService.Instance.Range(5, 15);
+            enemy.Power = RandomService.Instance.Range(5, 10);
             enemy.Speed = RandomService.Instance.Range(1, 5);
+        }
+
+        internal void Jump()
+        {
+            CanJumpTimer = _canJumpTimeout;
         }
 
         internal void Die()
@@ -87,6 +109,10 @@ namespace Jumper
             _player.transform.position = _playerSpawnPoint.transform.position;
             _player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             _enemyCount = 0;
+            CanMoveTimer = 0;
+            CanJumpTimer = 0;
+            CanMove = true;
+            CanJump = true;
             FindObjectsOfType<Enemy>().ToList().ForEach(e => Destroy(e.gameObject));
         }
 
